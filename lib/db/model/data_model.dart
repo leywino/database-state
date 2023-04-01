@@ -6,15 +6,15 @@ class StudentModel {
   @HiveField(0)
   final String key;
   @HiveField(1)
-  final String name;
+  late final String name;
   @HiveField(2)
-  final String age;
+  late final String age;
   @HiveField(3)
-  final String place;
+  late final String place;
   @HiveField(4)
-  final String phone;
+  late final String phone;
   @HiveField(5)
-  final String image;
+  late final String image;
 
   StudentModel({
     required this.name,
@@ -24,4 +24,5 @@ class StudentModel {
     required this.key,
     required this.image,
   });
+
 }

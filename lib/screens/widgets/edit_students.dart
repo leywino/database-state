@@ -1,10 +1,10 @@
 // ignore: duplicate_ignore
 // ignore_for_file: non_constant_identifier_names
-
-import 'package:database/db/functions/db_functions.dart';
+import 'package:database/bloc/students/students_bloc.dart';
+import 'package:database/screens/home_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:database/db/model/data_model.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
@@ -174,7 +174,7 @@ class _EditStudentsState extends State<EditStudents> {
                   ),
                   ElevatedButton.icon(
                     onPressed: () {
-                      Edit(widget.index);
+                      Edit(widget.index, context);
                       Navigator.pop(context);
                     },
                     label: const Text('Save'),
@@ -189,7 +189,7 @@ class _EditStudentsState extends State<EditStudents> {
     );
   }
 
-  Future<void> Edit(int index) async {
+  Future<void> Edit(int index, BuildContext context) async {
     final name = _nameController!.text.trim();
     final age = _ageController!.text.trim();
     final place = _placeController!.text.trim();
@@ -203,20 +203,20 @@ class _EditStudentsState extends State<EditStudents> {
         phone: phone,
         key: key,
         image: image);
-    final studentDB = await Hive.openBox<StudentModel>('student_db');
-    studentDB.putAt(index, student);
-    getAllStudents();
+    // final studentDB = await Hive.openBox<StudentModel>('student_db');
+    // studentDB.putAt(index, student);
+    context.read<StudentsBloc>().add(
+          EditStudent(index: index, studentModel: student),
+        );
   }
 
   getImage() async {
-    final PickedFile =
+    final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (PickedFile == null) {
+    if (pickedFile == null) {
       return;
     } else {
-      setState(() {
-        path = PickedFile.path;
-      });
+      imagePathNotifer.value = pickedFile.path;
     }
   }
 }

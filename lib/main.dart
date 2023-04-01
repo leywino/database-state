@@ -1,7 +1,8 @@
-import 'package:database/db/functions/db_functions.dart';
+import 'package:database/bloc/students/students_bloc.dart';
 import 'package:database/db/model/data_model.dart';
 import 'package:database/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 Future<void> main() async {
@@ -10,7 +11,7 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(StudentModelAdapter().typeId)) {
     Hive.registerAdapter(StudentModelAdapter());
   }
-  await getAllStudents();
+  await Hive.openBox<StudentModel>('student_db');
   runApp(const MyApp());
 }
 
@@ -20,13 +21,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Student List',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: [
+        
+        BlocProvider(
+          create: (context) => StudentsBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Student List',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: ScreenHome(),
+        debugShowCheckedModeBanner: false,
       ),
-      home: const ScreenHome(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }

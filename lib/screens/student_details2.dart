@@ -4,13 +4,10 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 // ignore: must_be_immutable
-class ShowDetails extends StatelessWidget {
-  // ignore: prefer_typing_uninitialized_variables
-  StudentModel? data;
-  // ignore: prefer_typing_uninitialized_variables
-  var student;
+class ShowDetails2 extends StatelessWidget {
+  StudentModel? studentList;
 
-  ShowDetails({super.key, this.data});
+  ShowDetails2({super.key, required this.studentList});
 
   @override
   Widget build(BuildContext context) {
@@ -29,22 +26,22 @@ class ShowDetails extends StatelessWidget {
               const SizedBox(height: 30),
               Center(
                 child: CircleAvatar(
-                  backgroundImage: FileImage(File(data!.image)),
+                  backgroundImage: FileImage(File(studentList!.image)),
                   radius: 60,
                 ),
               ),
               const SizedBox(height: 30),
               Details(
-                labeltext: 'Name : ${data!.name}',
+                labeltext: 'Name : ${studentList!.name}',
               ),
               Details(
-                labeltext: 'Age : ${data!.age}',
+                labeltext: 'Age : ${studentList!.age}',
               ),
               Details(
-                labeltext: 'Email : ${data!.place}',
+                labeltext: 'Email : ${studentList!.place}',
               ),
               Details(
-                labeltext: 'Ph : ${data!.phone}',
+                labeltext: 'Ph : ${studentList!.phone}',
               ),
             ],
           ),
