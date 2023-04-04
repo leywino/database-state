@@ -43,19 +43,24 @@ class _HomeNavState extends State<HomeNav> {
                     ValueListenableBuilder(
                         valueListenable: imagePathNotifer,
                         builder: (context, imagePath, child) {
-                          return imagePath == "assets/images/noimage.png"
-                              ? CircleAvatar(
+                          // return imagePath == "assets/images/noimage.png"
+                          //     ? CircleAvatar(
+                          //         backgroundColor: Colors.grey.shade400,
+                          //         radius: 120,
+                          //         // child: CircleAvatar(
+                          //         //   backgroundColor: Colors.grey.shade400,
+                          //         //   backgroundImage: AssetImage(imagePath),
+                          //         //   radius: 60,
+                          //         // ),
+                          //       )
+                          //     : CircleAvatar(
+                          //         backgroundColor: Colors.grey.shade400,
+                          //         child: Image.asset(imagePath),
+                          //         radius: 120,
+                          //       );
+                          return CircleAvatar(
                                   backgroundColor: Colors.grey.shade400,
-                                  radius: 120,
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.grey.shade400,
-                                    backgroundImage: AssetImage(imagePath),
-                                    radius: 60,
-                                  ),
-                                )
-                              : CircleAvatar(
-                                  backgroundColor: Colors.grey.shade400,
-                                  backgroundImage: AssetImage(imagePath),
+                                  // backgroundImage: AssetImage(imagePath),
                                   radius: 120,
                                 );
                         }),

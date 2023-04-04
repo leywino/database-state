@@ -40,9 +40,11 @@ class SearchScreen extends StatelessWidget {
                 controller: _searchController,
                 onChanged: (value) {
                   displayStudentNotifer.value = studentBoxList
-                      .where((element) => element.name
-                          .toLowerCase()
-                          .contains(value.toLowerCase()))
+                      .where(
+                        (element) => element.name.toLowerCase().contains(
+                              value.toLowerCase(),
+                            ),
+                      )
                       .toList();
                 },
               ),
