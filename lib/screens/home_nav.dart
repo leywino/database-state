@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 ValueNotifier<String> imagePathNotifer =
-    ValueNotifier("assets/images/noimage.png");
+    ValueNotifier("");
 
 class HomeNav extends StatefulWidget {
   const HomeNav({super.key});
@@ -36,35 +36,11 @@ class _HomeNavState extends State<HomeNav> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    // const Text(
-                    //   'Add Students',
-                    //   style: TextStyle(fontSize: 30),
-                    // ),
-                    ValueListenableBuilder(
-                        valueListenable: imagePathNotifer,
-                        builder: (context, imagePath, child) {
-                          // return imagePath == "assets/images/noimage.png"
-                          //     ? CircleAvatar(
-                          //         backgroundColor: Colors.grey.shade400,
-                          //         radius: 120,
-                          //         // child: CircleAvatar(
-                          //         //   backgroundColor: Colors.grey.shade400,
-                          //         //   backgroundImage: AssetImage(imagePath),
-                          //         //   radius: 60,
-                          //         // ),
-                          //       )
-                          //     : CircleAvatar(
-                          //         backgroundColor: Colors.grey.shade400,
-                          //         child: Image.asset(imagePath),
-                          //         radius: 120,
-                          //       );
-                          return CircleAvatar(
-                                  backgroundColor: Colors.grey.shade400,
-                                  // backgroundImage: AssetImage(imagePath),
-                                  radius: 120,
-                                );
-                        }),
-
+                    const Text(
+                      'Add Students',
+                      style: TextStyle(fontSize: 30),
+                    ),
+                    
                     const SizedBox(
                       height: 15,
                     ),
