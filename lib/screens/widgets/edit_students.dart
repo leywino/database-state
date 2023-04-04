@@ -64,10 +64,13 @@ class _EditStudentsState extends State<EditStudents> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
-                  CircleAvatar(
-                    radius: 90,
-                    backgroundImage: FileImage(
-                      File(widget.data.image),
+                  ValueListenableBuilder(
+                    valueListenable: imagePathNotifer,
+                    builder: (context, imageString, child) => CircleAvatar(
+                      radius: 90,
+                      backgroundImage: FileImage(
+                        File(imageString == "" ? widget.data.image : imageString),
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -172,13 +175,18 @@ class _EditStudentsState extends State<EditStudents> {
                   const SizedBox(
                     height: 8,
                   ),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Edit(widget.index, context);
-                      Navigator.pop(context);
+                  ValueListenableBuilder(
+                    valueListenable: imagePathNotifer,
+                    builder: (context, imageString, child) {
+                      return ElevatedButton.icon(
+                        onPressed: () {
+                          Edit(widget.index, context, imageString);
+                          Navigator.pop(context);
+                        },
+                        label: const Text('Save'),
+                        icon: const Icon(Icons.save),
+                      );
                     },
-                    label: const Text('Save'),
-                    icon: const Icon(Icons.save),
                   )
                 ],
               ),
@@ -189,13 +197,13 @@ class _EditStudentsState extends State<EditStudents> {
     );
   }
 
-  Future<void> Edit(int index, BuildContext context) async {
+  Future<void> Edit(int index, BuildContext context, String imageString) async {
     final name = _nameController!.text.trim();
     final age = _ageController!.text.trim();
     final place = _placeController!.text.trim();
     final phone = _phoneController!.text.trim();
     final key = DateTime.now().toString();
-    final image = path!;
+    final image = imageString;
     final student = StudentModel(
         name: name,
         age: age,
