@@ -145,10 +145,10 @@ class _HomeNavState extends State<HomeNav> {
                     ),
                     ValueListenableBuilder(
                       valueListenable: imagePathNotifer,
-                      builder: (context, value, child) {
+                      builder: (context, imageString, child) {
                         return ElevatedButton.icon(
                           onPressed: () {
-                            addButton(context, imagePathNotifer.value);
+                            addButton(context, imageString);
                           },
                           label: const Text('Add'),
                           icon: const Icon(Icons.add),
@@ -210,7 +210,7 @@ class _HomeNavState extends State<HomeNav> {
       field = 'Phone number';
       ErrorMessage();
       // ignore: unnecessary_null_comparison
-    } else if (image == null) {
+    } else if (image == "") {
       field = 'Image';
       ErrorMessage();
     } else {
